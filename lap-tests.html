@@ -1,0 +1,2844 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحاليل الطبية - طبيب 24/7</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@400;500;600;700&family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+  :root {
+    --primary: #1e40af;
+    --primary-dark: #1e3a8a;
+    --primary-light: #dbeafe;
+    --secondary: #dc2626;
+    --accent: #f59e0b;
+    --success: #059669;
+    --warning: #d97706;
+    --error: #dc2626;
+    --info: #0ea5e9;
+    --dark: #1e1b4b;
+    --light: #f0f9ff;
+    --surface: #ffffff;
+    --glass: rgba(255, 255, 255, 0.25);
+    --glass-dark: rgba(255, 255, 255, 0.1);
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-light: #64748b;
+    --gradient-primary: linear-gradient(135deg, #1e40af 0%, #3730a3 100%);
+    --gradient-hospital: linear-gradient(135deg, #1e40af 0%, #dc2626 100%);
+    --gradient-premium: linear-gradient(135deg, #1e40af 0%, #3730a3 50%, #7c3aed 100%);
+    --gradient-lab: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --shadow-glass: 0 8px 32px rgba(30, 64, 175, 0.2);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+    --shadow-large: 0 16px 48px rgba(0, 0, 0, 0.15);
+    --radius-xl: 24px;
+    --radius-lg: 20px;
+    --radius-md: 16px;
+    --radius-sm: 12px;
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', 'El Messiri', sans-serif;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+    color: var(--text-primary);
+    direction: rtl;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* تصميم شريط الحالة المتميز */
+.status-bar {
+    background: transparent;
+    color: var(--text-primary);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    backdrop-filter: blur(20px);
+    position: relative;
+    z-index: 1000;
+}
+
+.status-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    z-index: -1;
+}
+
+/* التطبيق الرئيسي */
+.premium-app {
+    max-width: 428px;
+    margin: 0 auto;
+    background: transparent;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* الخلفية الديناميكية */
+.background-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.floating-shapes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--gradient-primary);
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape:nth-child(1) {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.shape:nth-child(2) {
+    width: 150px;
+    height: 150px;
+    top: 60%;
+    right: 20%;
+    animation-delay: 2s;
+}
+
+.shape:nth-child(3) {
+    width: 100px;
+    height: 100px;
+    bottom: 20%;
+    left: 20%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+/* الهيدر المتقدم */
+.lab-header {
+    background: var(--gradient-lab);
+    color: white;
+    padding: 40px 24px 30px;
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+    box-shadow: var(--shadow-glass);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="rgba(255,255,255,0.05)" points="0,1000 1000,0 1000,1000"/></svg>');
+    background-size: cover;
+}
+
+.header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.header-title {
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    background: linear-gradient(45deg, #fff, #dbeafe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 25px;
+}
+
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: var(--radius-md);
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* المحتوى الرئيسي */
+.lab-content {
+    padding: 25px 20px;
+    padding-bottom: 120px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 30px 0 20px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 8px;
+}
+
+.section-title::before {
+    content: '';
+    width: 4px;
+    height: 24px;
+    background: var(--gradient-lab);
+    border-radius: 2px;
+}
+
+/* البحث المتقدم */
+.search-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+.search-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 50px 15px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    transition: var(--transition-smooth);
+}
+
+.search-input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+}
+
+.search-filters {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.filter-select {
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.filter-select:focus {
+    border-color: var(--primary);
+    outline: none;
+}
+
+/* الفئات الرئيسية */
+.categories-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.category-card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 20px 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-lab);
+    transform: scaleX(0);
+    transition: var(--transition-smooth);
+}
+
+.category-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+}
+
+.category-card:hover::before {
+    transform: scaleX(1);
+}
+
+.category-card.active {
+    background: var(--primary-light);
+    border-color: var(--primary);
+}
+
+.category-card.active::before {
+    transform: scaleX(1);
+}
+
+.category-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-lab);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+    font-size: 20px;
+    color: white;
+    transition: var(--transition-smooth);
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.category-name {
+    font-weight: 700;
+    font-size: 13px;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.category-count {
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* التحاليل الموصى بها */
+.recommended-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+.tests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.test-card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+.test-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-lab);
+    transform: scaleX(0);
+    transition: var(--transition-smooth);
+}
+
+.test-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-soft);
+}
+
+.test-card:hover::before {
+    transform: scaleX(1);
+}
+
+.test-card.recommended {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+.test-card.recommended::before {
+    background: var(--accent);
+}
+
+.test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.test-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-lab);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.test-badge {
+    background: var(--accent);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.test-name {
+    font-weight: 800;
+    font-size: 15px;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.test-description {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.test-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.test-price {
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--primary);
+}
+
+.test-duration {
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* جميع التحاليل */
+.all-tests-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+.tests-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.test-item {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.test-item:hover {
+    border-color: var(--primary);
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-soft);
+}
+
+.test-item-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-lab);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.test-item-info {
+    flex: 1;
+}
+
+.test-item-name {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--text-primary);
+}
+
+.test-item-category {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.test-item-features {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.feature-tag {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.test-item-price {
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--primary);
+    text-align: left;
+    min-width: 70px;
+}
+
+/* المختبرات */
+.labs-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+.labs-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.lab-card {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    position: relative;
+}
+
+.lab-card:hover {
+    border-color: var(--primary);
+    transform: translateX(-8px);
+    box-shadow: var(--shadow-soft);
+}
+
+.lab-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+}
+
+.lab-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-lab);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.lab-info {
+    flex: 1;
+}
+
+.lab-name {
+    font-weight: 800;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.lab-specialty {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.lab-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.stars {
+    color: #f59e0b;
+}
+
+.rating-value {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.rating-count {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.lab-features {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.lab-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.book-btn {
+    background: var(--gradient-lab);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: var(--radius-md);
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.book-btn:hover {
+    transform: translateY(-2px);
+}
+
+.lab-distance {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+/* الحجوزات */
+.bookings-section {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-card);
+    margin-bottom: 25px;
+    border: 1px solid #f1f5f9;
+}
+
+.bookings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.booking-item {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.booking-item:hover {
+    border-color: var(--primary);
+    transform: translateX(-5px);
+    box-shadow: var(--shadow-soft);
+}
+
+.booking-status {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+}
+
+.status-pending { background: var(--warning); }
+.status-confirmed { background: var(--success); }
+-status-completed { background: var(--info); }
+.status-cancelled { background: var(--error); }
+
+.booking-icon {
+    width: 45px;
+    height: 45px;
+    border-radius: var(--radius-md);
+    background: var(--gradient-lab);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: white;
+    flex-shrink: 0;
+}
+
+.booking-info {
+    flex: 1;
+}
+
+.booking-test {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.booking-lab {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+}
+
+.booking-date {
+    font-size: 11px;
+    color: var(--text-light);
+}
+
+.booking-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.action-btn {
+    background: var(--light);
+    border: 1px solid #e2e8f0;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.action-btn:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.action-btn.primary {
+    background: var(--primary);
+    color: white;
+}
+
+.action-btn.primary:hover {
+    background: var(--primary-dark);
+}
+
+/* النوافذ المنبثقة */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: var(--shadow-large);
+    animation: modalAppear 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f5f9;
+}
+
+.modal-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition-smooth);
+}
+
+.close-modal:hover {
+    color: var(--error);
+    transform: rotate(90deg);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--text-primary);
+    font-size: 14px;
+}
+
+.form-input, .form-select, .form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    transition: var(--transition-smooth);
+    background: white;
+    font-family: 'Tajawal', sans-serif;
+}
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 14px 24px;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    flex: 1;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background: var(--gradient-lab);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--light);
+    color: var(--text-primary);
+    border: 2px solid #e2e8f0;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* تفاصيل الحجز */
+.booking-summary {
+    background: #f8fafc;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid #e2e8f0;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.summary-value {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.booking-number {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: var(--radius-md);
+    font-family: monospace;
+    font-weight: 700;
+    text-align: center;
+    margin: 15px 0;
+}
+
+/* شريط التنقل السفلي */
+.bottom-nav-premium {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    padding: 15px;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-soft);
+    z-index: 1000;
+    max-width: 380px;
+    width: calc(100% - 40px);
+}
+
+.nav-item-premium {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: var(--radius-md);
+    transition: var(--transition-bounce);
+    flex: 1;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-item-premium.active {
+    background: var(--gradient-lab);
+    color: white;
+    transform: translateY(-10px);
+}
+
+.nav-item-premium.active .nav-label {
+    color: white;
+}
+
+.nav-item-premium.active::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    width: 20px;
+    height: 3px;
+    background: var(--gradient-lab);
+    border-radius: 2px;
+}
+
+.nav-icon-premium {
+    font-size: 20px;
+    margin-bottom: 6px;
+    transition: var(--transition-smooth);
+}
+
+.nav-item-premium.active .nav-icon-premium {
+    transform: scale(1.2);
+}
+
+.nav-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* التحميل والحركات */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* الإشعارات */
+.notification {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success);
+    color: white;
+    padding: 16px 24px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-large);
+    z-index: 3000;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: slideDown 0.3s ease-out;
+}
+
+.notification.error {
+    background: var(--error);
+}
+
+.notification.warning {
+    background: var(--warning);
+}
+
+.notification.info {
+    background: var(--info);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* نتائج التحاليل */
+.results-container {
+    background: #f8fafc;
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    margin: 20px 0;
+    border: 2px solid #e2e8f0;
+}
+
+.result-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.result-item:last-child {
+    border-bottom: none;
+}
+
+.result-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.result-value {
+    font-weight: 700;
+    margin: 0 15px;
+    min-width: 60px;
+    text-align: center;
+}
+
+.result-normal { color: var(--success); }
+.result-warning { color: var(--warning); }
+.result-danger { color: var(--error); }
+
+.result-range {
+    font-size: 12px;
+    color: var(--text-secondary);
+    min-width: 100px;
+    text-align: left;
+}
+
+.result-status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+    min-width: 60px;
+    text-align: center;
+}
+
+.status-normal { background: var(--success); }
+.status-warning { background: var(--warning); }
+.status-danger { background: var(--error); }
+
+/* التكيف مع الشاشات */
+@media (max-width: 428px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .tests-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .search-filters {
+        grid-template-columns: 1fr;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .lab-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .lab-actions {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    .test-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .test-item-price {
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+    <!-- تأثيرات الخلفية الديناميكية -->
+    <div class="background-effects">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+    </div>
+
+    <!-- شريط الحالة -->
+    <div class="status-bar">
+        <div class="status-left">
+            <span id="currentTime">2:45</span>
+        </div>
+        <div class="status-right">
+            <i class="fas fa-signal"></i>
+            <i class="fas fa-wifi"></i>
+            <i class="fas fa-battery-three-quarters"></i>
+        </div>
+    </div>
+
+    <!-- التطبيق الرئيسي -->
+    <div class="premium-app">
+        <!-- الهيدر -->
+        <div class="lab-header">
+            <div class="header-background"></div>
+            <div class="header-content">
+                <h1 class="header-title">التحاليل الطبية</h1>
+                <p class="header-subtitle">خدمات تحاليل طبية دقيقة وسريعة في مختبرات معتمدة</p>
+                
+                <div class="quick-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">50+</div>
+                        <div class="stat-label">نوع تحليل</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">25</div>
+                        <div class="stat-label">مختبر معتمد</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">4.9</div>
+                        <div class="stat-label">تقييم الخدمة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المحتوى الرئيسي -->
+        <div class="lab-content">
+            <!-- البحث السريع -->
+            <div class="section-title">البحث السريع</div>
+            <div class="search-section">
+                <div class="search-container">
+                    <input type="text" class="search-input" id="testSearch" placeholder="ابحث عن تحليل أو مختبر...">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+                <div class="search-filters">
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="">جميع الفئات</option>
+                        <option value="blood">تحاليل الدم</option>
+                        <option value="urine">تحاليل البول</option>
+                        <option value="hormones">الهرمونات</option>
+                        <option value="vitamins">الفيتامينات</option>
+                        <option value="liver">وظائف الكبد</option>
+                        <option value="kidney">وظائف الكلى</option>
+                    </select>
+                    <select class="filter-select" id="urgencyFilter">
+                        <option value="">جميع الخدمات</option>
+                        <option value="fast">نتائج سريعة</option>
+                        <option value="home">خدمة منزلية</option>
+                        <option value="express">نتائج عاجلة</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- الفئات الرئيسية -->
+            <div class="section-title">فئات التحاليل</div>
+            <div class="categories-section">
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- سيتم تعبئتها بالجافاسكربت -->
+                </div>
+            </div>
+
+            <!-- التحاليل الموصى بها -->
+            <div class="section-title">تحاليل موصى بها</div>
+            <div class="recommended-section">
+                <div class="tests-grid" id="recommendedTests">
+                    <!-- سيتم تعبئتها بالجافاسكربت -->
+                </div>
+            </div>
+
+            <!-- جميع التحاليل -->
+            <div class="section-title">جميع التحاليل</div>
+            <div class="all-tests-section">
+                <div class="tests-list" id="allTestsList">
+                    <!-- سيتم تعبئتها بالجافاسكربت -->
+                </div>
+            </div>
+
+            <!-- المختبرات المتعاقد معها -->
+            <div class="section-title">المختبرات المعتمدة</div>
+            <div class="labs-section">
+                <div class="labs-grid" id="labsGrid">
+                    <!-- سيتم تعبئتها بالجافاسكربت -->
+                </div>
+            </div>
+
+            <!-- حجوزاتي -->
+            <div class="section-title">حجوزاتي السابقة</div>
+            <div class="bookings-section">
+                <div class="bookings-list" id="bookingsList">
+                    <!-- سيتم تعبئتها بالجافاسكربت -->
+                </div>
+            </div>
+        </div>
+
+        <!-- نوافذ منبثقة -->
+        
+        <!-- نافذة تفاصيل التحليل -->
+        <div id="testDetailsModal" class="modal">
+            <div class="modal-content">
+                <!-- سيتم تعبئتها بالجافاسكربت -->
+            </div>
+        </div>
+
+        <!-- نافذة حجز تحليل -->
+        <div id="bookTestModal" class="modal">
+            <div class="modal-content">
+                <!-- سيتم تعبئتها بالجافاسكربت -->
+            </div>
+        </div>
+
+        <!-- نافذة تأكيد الحجز -->
+        <div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <!-- سيتم تعبئتها بالجافاسكربت -->
+            </div>
+        </div>
+
+        <!-- نافذة النتائج -->
+        <div id="resultsModal" class="modal">
+            <div class="modal-content">
+                <!-- سيتم تعبئتها بالجافاسكربت -->
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav-premium">
+            <a href="index.html" class="nav-item-premium">
+                <div class="nav-icon-premium">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="nav-label">الرئيسية</div>
+            </a>
+            <a href="consultation.html" class="nav-item-premium">
+                <div class="nav-icon-premium">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <div class="nav-label">الاستشارات</div>
+            </a>
+            <a href="lab-tests.html" class="nav-item-premium active">
+                <div class="nav-icon-premium">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="nav-label">التحاليل</div>
+            </a>
+            <a href="wallet.html" class="nav-item-premium">
+                <div class="nav-icon-premium">
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <div class="nav-label">المال</div>
+            </a>
+            <a href="profile.html" class="nav-item-premium">
+                <div class="nav-icon-premium">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="nav-label">حسابي</div>
+            </a>
+        </div>
+    </div>
+
+<script>
+// نظام التحاليل الطبية المتكامل
+class AdvancedLabSystem {
+    constructor() {
+        this.categories = [];
+        this.tests = [];
+        this.labs = [];
+        this.userBookings = JSON.parse(localStorage.getItem('labBookings')) || [];
+        this.userResults = JSON.parse(localStorage.getItem('labResults')) || [];
+        this.currentBooking = null;
+        this.selectedTests = [];
+        this.init();
+    }
+
+    init() {
+        this.loadCategories();
+        this.loadTests();
+        this.loadLabs();
+        this.setupEventListeners();
+        this.updateTime();
+        this.loadUserData();
+        setInterval(() => this.updateTime(), 60000);
+    }
+
+    setupEventListeners() {
+        // البحث في الوقت الحقيقي
+        const testSearch = document.getElementById('testSearch');
+        if (testSearch) {
+            testSearch.addEventListener('input', (e) => {
+                this.handleSearch(e.target.value);
+            });
+        }
+
+        // الفلاتر
+        const categoryFilter = document.getElementById('categoryFilter');
+        if (categoryFilter) {
+            categoryFilter.addEventListener('change', () => {
+                this.applyFilters();
+            });
+        }
+
+        const urgencyFilter = document.getElementById('urgencyFilter');
+        if (urgencyFilter) {
+            urgencyFilter.addEventListener('change', () => {
+                this.applyFilters();
+            });
+        }
+
+        // إغلاق النوافذ
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('modal')) {
+                this.closeModal(event.target.id);
+            }
+        });
+
+        // منع إرسال النماذج
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', (e) => e.preventDefault());
+        });
+    }
+
+    loadUserData() {
+        this.userAccount = JSON.parse(localStorage.getItem('financialAccount'));
+    }
+
+    loadCategories() {
+        this.categories = [
+            {
+                id: 1,
+                name: 'تحاليل الدم',
+                icon: 'fa-tint',
+                testCount: 25,
+                color: '#ef4444',
+                description: 'فحص مكونات الدم والكشف عن الأمراض'
+            },
+            {
+                id: 2,
+                name: 'تحاليل البول',
+                icon: 'fa-flask',
+                testCount: 15,
+                color: '#3b82f6',
+                description: 'فحص وظائف الكلى والمسالك البولية'
+            },
+            {
+                id: 3,
+                name: 'الهرمونات',
+                icon: 'fa-chart-line',
+                testCount: 20,
+                color: '#8b5cf6',
+                description: 'قياس مستوى الهرمونات في الجسم'
+            },
+            {
+                id: 4,
+                name: 'الفيتامينات',
+                icon: 'fa-apple-alt',
+                testCount: 12,
+                color: '#f59e0b',
+                description: 'فحص نقص الفيتامينات والمعادن'
+            },
+            {
+                id: 5,
+                name: 'وظائف الكبد',
+                icon: 'fa-liver',
+                testCount: 8,
+                color: '#10b981',
+                description: 'فحص إنزيمات ووظائف الكبد'
+            },
+            {
+                id: 6,
+                name: 'وظائف الكلى',
+                icon: 'fa-kidneys',
+                testCount: 10,
+                color: '#06b6d4',
+                description: 'فحص كفاءة عمل الكلى'
+            },
+            {
+                id: 7,
+                name: 'الدهون',
+                icon: 'fa-chart-pie',
+                testCount: 6,
+                color: '#ec4899',
+                description: 'قياس مستوى الدهون في الدم'
+            },
+            {
+                id: 8,
+                name: 'سكر الدم',
+                icon: 'fa-syringe',
+                testCount: 8,
+                color: '#84cc16',
+                description: 'مراقبة مستوى السكر في الدم'
+            }
+        ];
+        this.renderCategories();
+    }
+
+    loadTests() {
+        this.tests = [
+            {
+                id: 1,
+                name: 'تحليل الدم الشامل',
+                category: 'blood',
+                categoryId: 1,
+                description: 'فحص شامل لمكونات الدم بما في ذلك خلايا الدم الحمراء والبيضاء والصفائح الدموية',
+                price: 80,
+                duration: '24 ساعة',
+                preparation: 'الصيام 8-12 ساعة',
+                features: ['نتائج دقيقة', 'تحليل مفصل', 'تقرير طبي'],
+                icon: 'fa-tint',
+                isRecommended: true,
+                normalRange: 'راجع التقرير',
+                sampleType: 'دم'
+            },
+            {
+                id: 2,
+                name: 'تحليل وظائف الكبد',
+                category: 'liver',
+                categoryId: 5,
+                description: 'قياس إنزيمات الكبد والبروتينات لتقييم صحة الكبد',
+                price: 120,
+                duration: '48 ساعة',
+                preparation: 'الصيام 8 ساعات',
+                features: ['ALT', 'AST', 'Bilirubin'],
+                icon: 'fa-liver',
+                isRecommended: true,
+                normalRange: 'راجع التقرير',
+                sampleType: 'دم'
+            },
+            {
+                id: 3,
+                name: 'تحليل السكر التراكمي',
+                category: 'blood',
+                categoryId: 1,
+                description: 'قياس متوسط مستوى السكر في الدم خلال الشهرين الماضيين',
+                price: 60,
+                duration: '24 ساعة',
+                preparation: 'لا يحتاج صيام',
+                features: ['دقة عالية', 'مؤشر للسكري'],
+                icon: 'fa-syringe',
+                isRecommended: false,
+                normalRange: 'أقل من 5.7%',
+                sampleType: 'دم'
+            },
+            {
+                id: 4,
+                name: 'تحليل فيتامين د',
+                category: 'vitamins',
+                categoryId: 4,
+                description: 'قياس مستوى فيتامين د في الدم للكشف عن النقص',
+                price: 90,
+                duration: '72 ساعة',
+                preparation: 'لا يحتاج صيام',
+                features: ['نتائج دقيقة', 'توصيات علاجية'],
+                icon: 'fa-sun',
+                isRecommended: true,
+                normalRange: '30-100 نانوغرام/مل',
+                sampleType: 'دم'
+            },
+            {
+                id: 5,
+                name: 'تحليل البول الكامل',
+                category: 'urine',
+                categoryId: 2,
+                description: 'فحص شامل للبول للكشف عن الأمراض والالتهابات',
+                price: 40,
+                duration: '24 ساعة',
+                preparation: 'عينة بول صباحية',
+                features: ['فحص كيميائي', 'فحص مجهري'],
+                icon: 'fa-flask',
+                isRecommended: false,
+                normalRange: 'راجع التقرير',
+                sampleType: 'بول'
+            },
+            {
+                id: 6,
+                name: 'تحليل الهرمونات',
+                category: 'hormones',
+                categoryId: 3,
+                description: 'قياس مستوى الهرمونات المختلفة في الجسم',
+                price: 150,
+                duration: '72 ساعة',
+                preparation: 'حسب نوع الهرمون',
+                features: ['TSH', 'Testosterone', 'Estrogen'],
+                icon: 'fa-chart-line',
+                isRecommended: false,
+                normalRange: 'حسب الجنس والعمر',
+                sampleType: 'دم'
+            },
+            {
+                id: 7,
+                name: 'تحليل الدهون',
+                category: 'blood',
+                categoryId: 1,
+                description: 'قياس مستوى الكوليسترول والدهون في الدم',
+                price: 70,
+                duration: '24 ساعة',
+                preparation: 'الصيام 12 ساعة',
+                features: ['الكوليسترول', 'الدهون الثلاثية'],
+                icon: 'fa-chart-pie',
+                isRecommended: true,
+                normalRange: 'راجع التقرير',
+                sampleType: 'دم'
+            },
+            {
+                id: 8,
+                name: 'تحليل وظائف الكلى',
+                category: 'kidney',
+                categoryId: 6,
+                description: 'فحص كفاءة الكلى وقياس نسبة اليوريا والكرياتينين',
+                price: 85,
+                duration: '24 ساعة',
+                preparation: 'لا يحتاج صيام',
+                features: ['Creatinine', 'Urea', 'GFR'],
+                icon: 'fa-kidneys',
+                isRecommended: false,
+                normalRange: 'راجع التقرير',
+                sampleType: 'دم'
+            }
+        ];
+        this.renderRecommendedTests();
+        this.renderAllTests();
+    }
+
+    loadLabs() {
+        this.labs = [
+            {
+                id: 1,
+                name: 'مختبر الأمل المتقدم',
+                specialty: 'مختبر تحاليل طبية شاملة',
+                rating: 4.8,
+                ratingCount: 234,
+                distance: '2.5 كم',
+                features: ['خدمة منزلية', 'نتائج سريعة', 'مختبر معتمد'],
+                image: '🏥',
+                priceRange: 'اقتصادي',
+                workingHours: '24/7',
+                address: 'شارع الملك فهد، الرياض',
+                phone: '0112345678'
+            },
+            {
+                id: 2,
+                name: 'مختبر النخبة الطبي',
+                specialty: 'تحاليل متخصصة ودقيقة',
+                rating: 4.9,
+                ratingCount: 189,
+                distance: '3.2 كم',
+                features: ['نتائج عاجلة', 'أجهزة حديثة', 'طاقم متخصص'],
+                image: '🔬',
+                priceRange: 'متوسط',
+                workingHours: '6:00 ص - 12:00 م',
+                address: 'حي العليا، الرياض',
+                phone: '0118765432'
+            },
+            {
+                id: 3,
+                name: 'مختبر الصحة والجودة',
+                specialty: 'تحاليل طبية سريعة',
+                rating: 4.7,
+                ratingCount: 156,
+                distance: '1.8 كم',
+                features: ['خدمة منزلية', 'أسعار تنافسية', 'نتائج إلكترونية'],
+                image: '💊',
+                priceRange: 'اقتصادي',
+                workingHours: '24/7',
+                address: 'حي النخيل، الرياض',
+                phone: '0115554444'
+            },
+            {
+                id: 4,
+                name: 'مختبر دقيق المتقدم',
+                specialty: 'تحاليل دقيقة ومتطورة',
+                rating: 4.6,
+                ratingCount: 98,
+                distance: '4.1 كم',
+                features: ['تحاليل نادرة', 'دقة عالية', 'استشارات طبية'],
+                image: '🧪',
+                priceRange: 'متميز',
+                workingHours: '8:00 ص - 10:00 م',
+                address: 'حي السليمانية، الرياض',
+                phone: '0113332222'
+            }
+        ];
+        this.renderLabs();
+    }
+
+    renderCategories() {
+        const container = document.getElementById('categoriesGrid');
+        if (!container) return;
+
+        container.innerHTML = '';
+
+        this.categories.forEach(category => {
+            const categoryElement = document.createElement('div');
+            categoryElement.className = 'category-card';
+            categoryElement.onclick = () => this.filterByCategory(category.id);
+            categoryElement.title = category.description;
+            
+            categoryElement.innerHTML = `
+                <div class="category-icon" style="background: ${category.color}">
+                    <i class="fas ${category.icon}"></i>
+                </div>
+                <div class="category-name">${category.name}</div>
+                <div class="category-count">${category.testCount} تحليل</div>
+            `;
+            
+            container.appendChild(categoryElement);
+        });
+    }
+
+    renderRecommendedTests() {
+        const container = document.getElementById('recommendedTests');
+        if (!container) return;
+
+        const recommendedTests = this.tests.filter(test => test.isRecommended);
+
+        if (recommendedTests.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-flask" style="font-size: 48px; margin-bottom: 16px;"></i>
+                    <div>لا توجد تحاليل موصى بها</div>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        recommendedTests.forEach(test => {
+            const testElement = document.createElement('div');
+            testElement.className = 'test-card recommended';
+            testElement.onclick = () => this.showTestDetails(test);
+            
+            testElement.innerHTML = `
+                <div class="test-header">
+                    <div class="test-icon">
+                        <i class="fas ${test.icon}"></i>
+                    </div>
+                    <div class="test-badge">موصى به</div>
+                </div>
+                <div class="test-name">${test.name}</div>
+                <div class="test-description">${test.description}</div>
+                <div class="test-meta">
+                    <div class="test-price">${test.price} ر.ي</div>
+                    <div class="test-duration">
+                        <i class="fas fa-clock"></i>
+                        ${test.duration}
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(testElement);
+        });
+    }
+
+    renderAllTests() {
+        const container = document.getElementById('allTestsList');
+        if (!container) return;
+
+        if (this.tests.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-flask" style="font-size: 48px; margin-bottom: 16px;"></i>
+                    <div>لا توجد تحاليل متاحة</div>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        this.tests.forEach(test => {
+            const category = this.categories.find(cat => cat.id === test.categoryId);
+            
+            const testElement = document.createElement('div');
+            testElement.className = 'test-item';
+            testElement.onclick = () => this.showTestDetails(test);
+            
+            testElement.innerHTML = `
+                <div class="test-item-icon">
+                    <i class="fas ${test.icon}"></i>
+                </div>
+                <div class="test-item-info">
+                    <div class="test-item-name">${test.name}</div>
+                    <div class="test-item-category">${category ? category.name : test.category}</div>
+                    <div class="test-item-features">
+                        ${test.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="test-item-price">${test.price} ر.ي</div>
+            `;
+            
+            container.appendChild(testElement);
+        });
+    }
+
+    renderLabs() {
+        const container = document.getElementById('labsGrid');
+        if (!container) return;
+
+        if (this.labs.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-hospital" style="font-size: 48px; margin-bottom: 16px;"></i>
+                    <div>لا توجد مختبرات متاحة</div>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        this.labs.forEach((lab, index) => {
+            const labElement = document.createElement('div');
+            labElement.className = `lab-card ${index === 0 ? 'featured' : ''}`;
+            labElement.onclick = () => this.showLabDetails(lab);
+            
+            const stars = this.generateStars(lab.rating);
+            
+            labElement.innerHTML = `
+                <div class="lab-avatar">
+                    ${lab.image}
+                </div>
+                <div class="lab-info">
+                    <div class="lab-name">${lab.name}</div>
+                    <div class="lab-specialty">${lab.specialty}</div>
+                    <div class="lab-rating">
+                        <div class="stars">${stars}</div>
+                        <div class="rating-value">${lab.rating}</div>
+                        <div class="rating-count">(${lab.ratingCount})</div>
+                    </div>
+                    <div class="lab-features">
+                        ${lab.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="lab-actions">
+                    <button class="book-btn" onclick="event.stopPropagation(); labSystem.selectLab(${lab.id})">
+                        <i class="fas fa-calendar-plus"></i>
+                        احجز الآن
+                    </button>
+                    <div class="lab-distance">${lab.distance}</div>
+                </div>
+            `;
+            
+            container.appendChild(labElement);
+        });
+    }
+
+    renderBookings() {
+        const container = document.getElementById('bookingsList');
+        if (!container) return;
+
+        if (this.userBookings.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-calendar" style="font-size: 48px; margin-bottom: 16px;"></i>
+                    <div>لا توجد حجوزات سابقة</div>
+                    <p style="font-size: 14px; margin-top: 8px;">يمكنك حجز تحاليلك الطبية الآن</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        this.userBookings.forEach(booking => {
+            const bookingElement = document.createElement('div');
+            bookingElement.className = 'booking-item';
+            bookingElement.onclick = () => this.showBookingDetails(booking);
+            
+            const statusText = this.getStatusText(booking.status);
+            const statusClass = `status-${booking.status}`;
+            
+            bookingElement.innerHTML = `
+                <div class="booking-status ${statusClass}">${statusText}</div>
+                <div class="booking-icon">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="booking-info">
+                    <div class="booking-test">${booking.testName}</div>
+                    <div class="booking-lab">${booking.labName}</div>
+                    <div class="booking-date">${booking.date} - ${booking.time}</div>
+                </div>
+                <div class="booking-actions">
+                    ${booking.status === 'completed' ? 
+                        `<button class="action-btn primary" onclick="event.stopPropagation(); labSystem.showResults('${booking.id}')">
+                            النتائج
+                        </button>` : ''
+                    }
+                    ${booking.status === 'pending' ? 
+                        `<button class="action-btn" onclick="event.stopPropagation(); labSystem.cancelBooking('${booking.id}')">
+                            إلغاء
+                        </button>` : ''
+                    }
+                </div>
+            `;
+            
+            container.appendChild(bookingElement);
+        });
+    }
+
+    generateStars(rating) {
+        const fullStars = Math.floor(rating);
+        const halfStar = rating % 1 >= 0.5;
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+        
+        let stars = '';
+        
+        for (let i = 0; i < fullStars; i++) {
+            stars += '<i class="fas fa-star"></i>';
+        }
+        
+        if (halfStar) {
+            stars += '<i class="fas fa-star-half-alt"></i>';
+        }
+        
+        for (let i = 0; i < emptyStars; i++) {
+            stars += '<i class="far fa-star"></i>';
+        }
+        
+        return stars;
+    }
+
+    getStatusText(status) {
+        const statusMap = {
+            'pending': 'قيد الانتظار',
+            'confirmed': 'مؤكد',
+            'completed': 'مكتمل',
+            'cancelled': 'ملغى'
+        };
+        return statusMap[status] || status;
+    }
+
+    handleSearch(query) {
+        if (query.length >= 2) {
+            const filteredTests = this.tests.filter(test => 
+                test.name.includes(query) || 
+                test.description.includes(query) ||
+                test.category.includes(query)
+            );
+            this.renderFilteredTests(filteredTests);
+        } else if (query.length === 0) {
+            this.renderAllTests();
+        }
+    }
+
+    applyFilters() {
+        const category = document.getElementById('categoryFilter').value;
+        const urgency = document.getElementById('urgencyFilter').value;
+        
+        let filteredTests = this.tests;
+        
+        if (category) {
+            filteredTests = filteredTests.filter(test => test.category === category);
+        }
+        
+        if (urgency) {
+            // تطبيق فلاتر إضافية حسب نوع الخدمة
+            if (urgency === 'fast') {
+                filteredTests = filteredTests.filter(test => test.duration.includes('24'));
+            } else if (urgency === 'home') {
+                filteredTests = filteredTests.filter(test => test.features.includes('خدمة منزلية'));
+            }
+        }
+        
+        this.renderFilteredTests(filteredTests);
+    }
+
+    renderFilteredTests(filteredTests) {
+        const container = document.getElementById('allTestsList');
+        if (!container) return;
+
+        if (filteredTests.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
+                    <i class="fas fa-search" style="font-size: 48px; margin-bottom: 16px;"></i>
+                    <div>لا توجد نتائج</div>
+                    <p style="font-size: 14px; margin-top: 8px;">جرب تغيير معايير البحث</p>
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = '';
+
+        filteredTests.forEach(test => {
+            const category = this.categories.find(cat => cat.id === test.categoryId);
+            
+            const testElement = document.createElement('div');
+            testElement.className = 'test-item';
+            testElement.onclick = () => this.showTestDetails(test);
+            
+            testElement.innerHTML = `
+                <div class="test-item-icon">
+                    <i class="fas ${test.icon}"></i>
+                </div>
+                <div class="test-item-info">
+                    <div class="test-item-name">${test.name}</div>
+                    <div class="test-item-category">${category ? category.name : test.category}</div>
+                    <div class="test-item-features">
+                        ${test.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    </div>
+                </div>
+                <div class="test-item-price">${test.price} ر.ي</div>
+            `;
+            
+            container.appendChild(testElement);
+        });
+    }
+
+    filterByCategory(categoryId) {
+        const category = this.categories.find(cat => cat.id === categoryId);
+        const filteredTests = this.tests.filter(test => test.categoryId === categoryId);
+        
+        this.renderFilteredTests(filteredTests);
+        
+        // تحديث حالة التخصص النشط
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.classList.remove('active');
+        });
+        event.target.closest('.category-card').classList.add('active');
+        
+        this.showNotification(`تم عرض تحاليل ${category.name}`, 'info');
+    }
+
+    showTestDetails(test) {
+        const category = this.categories.find(cat => cat.id === test.categoryId);
+        
+        const modalContent = `
+            <div class="modal-header">
+                <div class="modal-title">تفاصيل التحليل</div>
+                <button class="close-modal" onclick="labSystem.closeModal('testDetailsModal')">×</button>
+            </div>
+            <div style="text-align: center; padding: 20px 0;">
+                <div class="test-icon" style="width: 80px; height: 80px; font-size: 32px; margin: 0 auto 20px;">
+                    <i class="fas ${test.icon}"></i>
+                </div>
+                <h3 style="margin-bottom: 10px;">${test.name}</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">${category ? category.name : test.category}</p>
+            </div>
+            
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 20px; margin: 20px 0;">
+                <h4 style="margin-bottom: 15px; color: var(--text-primary);">معلومات التحليل</h4>
+                <div style="text-align: right; line-height: 2;">
+                    <p><strong>الوصف:</strong> ${test.description}</p>
+                    <p><strong>نوع العينة:</strong> ${test.sampleType}</p>
+                    <p><strong>مدة الانتظار:</strong> ${test.duration}</p>
+                    <p><strong>التجهيز:</strong> ${test.preparation}</p>
+                    <p><strong>المعدل الطبيعي:</strong> ${test.normalRange}</p>
+                </div>
+            </div>
+            
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 20px; margin: 20px 0;">
+                <h4 style="margin-bottom: 15px; color: var(--text-primary);">المميزات</h4>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    ${test.features.map(feature => `
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 8px; background: white; border-radius: var(--radius-sm);">
+                            <i class="fas fa-check" style="color: var(--success);"></i>
+                            <span>${feature}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="labSystem.closeModal('testDetailsModal')">
+                    <i class="fas fa-times"></i>
+                    إغلاق
+                </button>
+                <button class="btn btn-primary" onclick="labSystem.closeModal('testDetailsModal'); labSystem.addToCart(${test.id})">
+                    <i class="fas fa-cart-plus"></i>
+                    إضافة للحجز
+                </button>
+            </div>
+        `;
+
+        document.getElementById('testDetailsModal').querySelector('.modal-content').innerHTML = modalContent;
+        this.openModal('testDetailsModal');
+    }
+
+    showLabDetails(lab) {
+        const stars = this.generateStars(lab.rating);
+        
+        const modalContent = `
+            <div class="modal-header">
+                <div class="modal-title">تفاصيل المختبر</div>
+                <button class="close-modal" onclick="labSystem.closeModal('labDetailsModal')">×</button>
+            </div>
+            <div style="text-align: center; padding: 20px 0;">
+                <div class="lab-avatar" style="width: 100px; height: 100px; font-size: 40px; margin: 0 auto 20px;">
+                    ${lab.image}
+                </div>
+                <h3 style="margin-bottom: 10px;">${lab.name}</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">${lab.specialty}</p>
+                
+                <div class="lab-rating" style="justify-content: center; margin-bottom: 20px;">
+                    <div class="stars">${stars}</div>
+                    <div class="rating-value">${lab.rating}</div>
+                    <div class="rating-count">(${lab.ratingCount} تقييم)</div>
+                </div>
+            </div>
+            
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 20px; margin: 20px 0;">
+                <h4 style="margin-bottom: 15px; color: var(--text-primary);">معلومات المختبر</h4>
+                <div style="text-align: right; line-height: 2;">
+                    <p><strong>العنوان:</strong> ${lab.address}</p>
+                    <p><strong>الهاتف:</strong> ${lab.phone}</p>
+                    <p><strong>ساعات العمل:</strong> ${lab.workingHours}</p>
+                    <p><strong>نطاق الأسعار:</strong> ${lab.priceRange}</p>
+                    <p><strong>المسافة:</strong> ${lab.distance}</p>
+                </div>
+            </div>
+            
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 20px; margin: 20px 0;">
+                <h4 style="margin-bottom: 15px; color: var(--text-primary);">الخدمات المتاحة</h4>
+                <div style="display: grid; gap: 10px;">
+                    ${lab.features.map(feature => `
+                        <div style="display: flex; align-items: center; gap: 8px; padding: 10px; background: white; border-radius: var(--radius-sm);">
+                            <i class="fas fa-check" style="color: var(--success);"></i>
+                            <span>${feature}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="labSystem.closeModal('labDetailsModal')">
+                    <i class="fas fa-times"></i>
+                    إغلاق
+                </button>
+                <button class="btn btn-primary" onclick="labSystem.closeModal('labDetailsModal'); labSystem.selectLab(${lab.id})">
+                    <i class="fas fa-calendar-plus"></i>
+                    احجز في هذا المختبر
+                </button>
+            </div>
+        `;
+
+        this.createModal('labDetailsModal', modalContent);
+        this.openModal('labDetailsModal');
+    }
+
+    createModal(modalId, content) {
+        let modal = document.getElementById(modalId);
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = modalId;
+            modal.className = 'modal';
+            modal.innerHTML = `<div class="modal-content">${content}</div>`;
+            document.body.appendChild(modal);
+        } else {
+            modal.querySelector('.modal-content').innerHTML = content;
+        }
+    }
+
+    addToCart(testId) {
+        const test = this.tests.find(t => t.id === testId);
+        if (!test) {
+            this.showNotification('التحليل غير موجود', 'error');
+            return;
+        }
+
+        // التحقق من عدم إضافة التحليل مسبقاً
+        if (this.selectedTests.find(t => t.id === testId)) {
+            this.showNotification('تم إضافة هذا التحليل مسبقاً', 'info');
+            return;
+        }
+
+        this.selectedTests.push(test);
+        this.showNotification(`تم إضافة ${test.name} إلى سلة الحجز`, 'success');
+        
+        // إذا كان هناك مختبر محدد، فتح نافذة الحجز
+        if (this.currentBooking && this.currentBooking.lab) {
+            this.openBookModal();
+        }
+    }
+
+    selectLab(labId) {
+        const lab = this.labs.find(l => l.id === labId);
+        if (!lab) {
+            this.showNotification('المختبر غير موجود', 'error');
+            return;
+        }
+
+        this.currentBooking = {
+            lab: lab,
+            tests: [],
+            datetime: null,
+            address: '',
+            notes: ''
+        };
+
+        this.showNotification(`تم اختيار ${lab.name}`, 'success');
+        
+        // إذا كانت هناك تحاليل محددة، فتح نافذة الحجز
+        if (this.selectedTests.length > 0) {
+            this.openBookModal();
+        } else {
+            this.showNotification('يرجى اختيار التحاليل أولاً', 'info');
+        }
+    }
+
+    openBookModal() {
+        if (!this.currentBooking || !this.currentBooking.lab) {
+            this.showNotification('يرجى اختيار المختبر أولاً', 'error');
+            return;
+        }
+
+        if (this.selectedTests.length === 0) {
+            this.showNotification('يرجى اختيار تحليل واحد على الأقل', 'error');
+            return;
+        }
+
+        const totalPrice = this.selectedTests.reduce((sum, test) => sum + test.price, 0);
+        const bookingNumber = 'LB-' + new Date().getFullYear() + '-' + String(this.userBookings.length + 1).padStart(3, '0');
+        
+        const modalContent = `
+            <div class="modal-header">
+                <div class="modal-title">حجز تحاليل طبية</div>
+                <button class="close-modal" onclick="labSystem.closeModal('bookTestModal')">×</button>
+            </div>
+            
+            <div class="booking-summary">
+                <div class="booking-number">${bookingNumber}</div>
+                <div class="summary-item">
+                    <span class="summary-label">المختبر:</span>
+                    <span class="summary-value">${this.currentBooking.lab.name}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">عدد التحاليل:</span>
+                    <span class="summary-value">${this.selectedTests.length}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">الإجمالي:</span>
+                    <span class="summary-value">${totalPrice} ر.ي</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">تاريخ ووقت الحجز *</label>
+                <input type="datetime-local" class="form-input" id="bookingDateTime" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">العنوان (لخدمة المنزل) </label>
+                <input type="text" class="form-input" id="bookingAddress" placeholder="أدخل العنوان إذا كانت الخدمة منزلية">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">ملاحظات إضافية</label>
+                <textarea class="form-textarea" id="bookingNotes" placeholder="ملاحظات خاصة بالتحليل..."></textarea>
+            </div>
+            
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 15px; margin: 20px 0;">
+                <h4 style="margin-bottom: 10px; color: var(--text-primary);">التحاليل المختارة</h4>
+                <div style="max-height: 150px; overflow-y: auto;">
+                    ${this.selectedTests.map(test => `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #e2e8f0;">
+                            <span>${test.name}</span>
+                            <span style="font-weight: 700; color: var(--primary);">${test.price} ر.ي</span>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="labSystem.closeModal('bookTestModal')">
+                    <i class="fas fa-times"></i>
+                    إلغاء
+                </button>
+                <button class="btn btn-primary" onclick="labSystem.proceedToPayment()">
+                    <i class="fas fa-credit-card"></i>
+                    متابعة للدفع
+                </button>
+            </div>
+        `;
+
+        document.getElementById('bookTestModal').querySelector('.modal-content').innerHTML = modalContent;
+        
+        // تعيين الوقت الافتراضي (بعد ساعتين من الآن)
+        const now = new Date();
+        now.setHours(now.getHours() + 2);
+        const defaultDateTime = now.toISOString().slice(0, 16);
+        document.getElementById('bookingDateTime').value = defaultDateTime;
+        
+        this.openModal('bookTestModal');
+    }
+
+    proceedToPayment() {
+        const datetime = document.getElementById('bookingDateTime').value;
+        const address = document.getElementById('bookingAddress').value;
+        const notes = document.getElementById('bookingNotes').value;
+        
+        if (!datetime) {
+            this.showNotification('يرجى اختيار تاريخ ووقت الحجز', 'error');
+            return;
+        }
+
+        this.currentBooking.datetime = datetime;
+        this.currentBooking.address = address;
+        this.currentBooking.notes = notes;
+        this.currentBooking.tests = [...this.selectedTests];
+
+        // التحقق من رصيد المستخدم
+        if (!this.userAccount) {
+            this.showNotification('يرجى إنشاء حساب مالي أولاً', 'error');
+            setTimeout(() => {
+                window.location.href = 'financial.html';
+            }, 2000);
+            return;
+        }
+
+        const totalPrice = this.selectedTests.reduce((sum, test) => sum + test.price, 0);
+        
+        if (this.userAccount.balance < totalPrice) {
+            this.showNotification('رصيدك غير كافي، يرجى شحن الحساب', 'error');
+            setTimeout(() => {
+                window.location.href = 'financial.html';
+            }, 2000);
+            return;
+        }
+
+        // معالجة الحجز
+        this.processBooking();
+    }
+
+    processBooking() {
+        const totalPrice = this.currentBooking.tests.reduce((sum, test) => sum + test.price, 0);
+        const bookingNumber = 'LB-' + new Date().getFullYear() + '-' + String(this.userBookings.length + 1).padStart(3, '0');
+        
+        const booking = {
+            id: bookingNumber,
+            lab: this.currentBooking.lab,
+            tests: this.currentBooking.tests,
+            datetime: this.currentBooking.datetime,
+            address: this.currentBooking.address,
+            notes: this.currentBooking.notes,
+            status: 'confirmed',
+            totalPrice: totalPrice,
+            createdAt: new Date().toISOString(),
+            testNames: this.currentBooking.tests.map(test => test.name).join('، '),
+            labName: this.currentBooking.lab.name
+        };
+
+        // تحديث رصيد المستخدم
+        if (this.userAccount) {
+            this.userAccount.balance -= totalPrice;
+            localStorage.setItem('financialAccount', JSON.stringify(this.userAccount));
+        }
+
+        // إضافة إلى سجل الحجوزات
+        this.userBookings.unshift(booking);
+        localStorage.setItem('labBookings', JSON.stringify(this.userBookings));
+
+        // إضافة إلى سجل المعاملات
+        this.addToTransactionHistory(booking);
+
+        this.showNotification(`تم الحجز بنجاح: ${totalPrice} ر.ي`, 'success');
+        
+        // عرض تأكيد الحجز
+        this.showConfirmationModal(booking);
+        
+        this.closeModal('bookTestModal');
+        this.selectedTests = [];
+        this.currentBooking = null;
+        
+        // تحديث عرض الحجوزات
+        this.renderBookings();
+    }
+
+    addToTransactionHistory(booking) {
+        const transactions = JSON.parse(localStorage.getItem('financialTransactions')) || [];
+        
+        const transaction = {
+            id: 'TXN' + Date.now(),
+            type: 'lab_tests',
+            title: `تحاليل طبية في ${booking.lab.name}`,
+            description: `${booking.tests.length} تحليل - ${booking.testNames}`,
+            amount: -booking.totalPrice,
+            ref: booking.id,
+            date: new Date().toLocaleDateString('ar-EG'),
+            time: new Date().toLocaleTimeString('ar-EG'),
+            status: 'completed',
+            icon: 'icon-lab',
+            method: 'wallet',
+            lab: booking.lab.name
+        };
+        
+        transactions.unshift(transaction);
+        localStorage.setItem('financialTransactions', JSON.stringify(transactions));
+    }
+
+    showConfirmationModal(booking) {
+        const modalContent = `
+            <div class="modal-header">
+                <div class="modal-title">تم الحجز بنجاح</div>
+                <button class="close-modal" onclick="labSystem.closeModal('confirmationModal')">×</button>
+            </div>
+            
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 64px; color: var(--success); margin-bottom: 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 style="margin-bottom: 10px; color: var(--text-primary);">تم تأكيد حجز التحاليل</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 20px;">سنرسل لك رسالة تأكيد بالتفاصيل</p>
+                
+                <div class="booking-number pulse" style="font-size: 18px; margin: 20px 0;">${booking.id}</div>
+                
+                <div class="booking-summary">
+                    <div class="summary-item">
+                        <span class="summary-label">المختبر:</span>
+                        <span class="summary-value">${booking.lab.name}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">الوقت:</span>
+                        <span class="summary-value">${new Date(booking.datetime).toLocaleString('ar-EG')}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">عدد التحاليل:</span>
+                        <span class="summary-value">${booking.tests.length}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">المبلغ:</span>
+                        <span class="summary-value">${booking.totalPrice} ر.ي</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-primary" onclick="labSystem.closeModal('confirmationModal')">
+                    <i class="fas fa-check"></i>
+                    حسناً
+                </button>
+            </div>
+        `;
+
+        document.getElementById('confirmationModal').querySelector('.modal-content').innerHTML = modalContent;
+        this.openModal('confirmationModal');
+    }
+
+    showBookingDetails(booking) {
+        const modalContent = `
+            <div class="modal-header">
+                <div class="modal-title">تفاصيل الحجز</div>
+                <button class="close-modal" onclick="labSystem.closeModal('bookingDetailsModal')">×</button>
+            </div>
+            
+            <div class="booking-summary">
+                <div class="booking-number">${booking.id}</div>
+                <div class="summary-item">
+                    <span class="summary-label">الحالة:</span>
+                    <span class="summary-value" style="color: ${this.getStatusColor(booking.status)}">${this.getStatusText(booking.status)}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">المختبر:</span>
+                    <span class="summary-value">${booking.labName}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">التاريخ:</span>
+                    <span class="summary-value">${new Date(booking.datetime).toLocaleDateString('ar-EG')}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">الوقت:</span>
+                    <span class="summary-value">${new Date(booking.datetime).toLocaleTimeString('ar-EG')}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">المبلغ:</span>
+                    <span class="summary-value">${booking.totalPrice} ر.ي</span>
+                </div>
+            </div>
+
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 20px; margin: 20px 0;">
+                <h4 style="margin-bottom: 15px; color: var(--text-primary);">التحاليل المطلوبة</h4>
+                <div style="max-height: 200px; overflow-y: auto;">
+                    ${booking.tests.map(test => `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #e2e8f0;">
+                            <div>
+                                <div style="font-weight: 600;">${test.name}</div>
+                                <div style="font-size: 12px; color: var(--text-secondary);">${test.description}</div>
+                            </div>
+                            <div style="font-weight: 700; color: var(--primary);">${test.price} ر.ي</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            
+            ${booking.address ? `
+                <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 15px; margin: 20px 0;">
+                    <h4 style="margin-bottom: 10px; color: var(--text-primary);">العنوان</h4>
+                    <p>${booking.address}</p>
+                </div>
+            ` : ''}
+            
+            ${booking.notes ? `
+                <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 15px; margin: 20px 0;">
+                    <h4 style="margin-bottom: 10px; color: var(--text-primary);">ملاحظات</h4>
+                    <p>${booking.notes}</p>
+                </div>
+            ` : ''}
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="labSystem.closeModal('bookingDetailsModal')">
+                    <i class="fas fa-times"></i>
+                    إغلاق
+                </button>
+                ${booking.status === 'completed' ? 
+                    `<button class="btn btn-primary" onclick="labSystem.closeModal('bookingDetailsModal'); labSystem.showResults('${booking.id}')">
+                        <i class="fas fa-file-medical"></i>
+                        عرض النتائج
+                    </button>` : ''
+                }
+            </div>
+        `;
+
+        this.createModal('bookingDetailsModal', modalContent);
+        this.openModal('bookingDetailsModal');
+    }
+
+    showResults(bookingId) {
+        const booking = this.userBookings.find(b => b.id === bookingId);
+        if (!booking) {
+            this.showNotification('الحجز غير موجود', 'error');
+            return;
+        }
+
+        // محاكاة نتائج التحاليل
+        const results = this.generateMockResults(booking.tests);
+        
+        const modalContent = `
+            <div class="modal-header">
+                <div class="modal-title">نتائج التحاليل</div>
+                <button class="close-modal" onclick="labSystem.closeModal('resultsModal')">×</button>
+            </div>
+            
+            <div class="booking-summary">
+                <div class="booking-number">${booking.id}</div>
+                <div class="summary-item">
+                    <span class="summary-label">المختبر:</span>
+                    <span class="summary-value">${booking.labName}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">تاريخ النتائج:</span>
+                    <span class="summary-value">${new Date().toLocaleDateString('ar-EG')}</span>
+                </div>
+            </div>
+
+            <div class="results-container">
+                <h4 style="margin-bottom: 15px; color: var(--text-primary);">نتائج التحاليل</h4>
+                ${results.map(result => `
+                    <div class="result-item">
+                        <div class="result-name">${result.name}</div>
+                        <div class="result-value ${result.status}">${result.value}</div>
+                        <div class="result-range">${result.range}</div>
+                        <div class="result-status status-${result.status}">${result.statusText}</div>
+                    </div>
+                `).join('')}
+            </div>
+
+            <div style="background: #f8fafc; border-radius: var(--radius-md); padding: 15px; margin: 20px 0;">
+                <h4 style="margin-bottom: 10px; color: var(--text-primary);">التوصيات</h4>
+                <p>${this.generateRecommendations(results)}</p>
+            </div>
+            
+            <div class="form-actions">
+                <button class="btn btn-secondary" onclick="labSystem.closeModal('resultsModal')">
+                    <i class="fas fa-times"></i>
+                    إغلاق
+                </button>
+                <button class="btn btn-primary" onclick="labSystem.downloadResults('${bookingId}')">
+                    <i class="fas fa-download"></i>
+                    تحميل النتائج
+                </button>
+            </div>
+        `;
+
+        document.getElementById('resultsModal').querySelector('.modal-content').innerHTML = modalContent;
+        this.openModal('resultsModal');
+    }
+
+    generateMockResults(tests) {
+        const results = [];
+        
+        tests.forEach(test => {
+            // محاكاة نتائج مختلفة لكل تحليل
+            const status = Math.random() > 0.7 ? 'warning' : Math.random() > 0.9 ? 'danger' : 'normal';
+            const statusText = status === 'normal' ? 'طبيعي' : status === 'warning' ? 'انتباه' : 'غير طبيعي';
+            
+            let value, range;
+            
+            switch(test.name) {
+                case 'تحليل الدم الشامل':
+                    value = '5.2 مليون/مم³';
+                    range = '4.5-6.0 مليون/مم³';
+                    break;
+                case 'تحليل وظائف الكبد':
+                    value = '25 وحدة/لتر';
+                    range = '10-40 وحدة/لتر';
+                    break;
+                case 'تحليل السكر التراكمي':
+                    value = '5.4%';
+                    range = 'أقل من 5.7%';
+                    break;
+                case 'تحليل فيتامين د':
+                    value = '35 نانوغرام/مل';
+                    range = '30-100 نانوغرام/مل';
+                    break;
+                case 'تحليل البول الكامل':
+                    value = 'سلبي';
+                    range = 'سلبي';
+                    break;
+                case 'تحليل الدهون':
+                    value = '180 ملغ/دل';
+                    range = 'أقل من 200 ملغ/دل';
+                    break;
+                default:
+                    value = 'ضمن المعدل';
+                    range = 'طبيعي';
+            }
+            
+            results.push({
+                name: test.name,
+                value: value,
+                range: range,
+                status: status,
+                statusText: statusText
+            });
+        });
+        
+        return results;
+    }
+
+    generateRecommendations(results) {
+        const abnormalResults = results.filter(r => r.status !== 'normal');
+        
+        if (abnormalResults.length === 0) {
+            return 'جميع النتائج ضمن المعدل الطبيعي. حافظ على نمط حياتك الصحي.';
+        }
+        
+        if (abnormalResults.some(r => r.status === 'danger')) {
+            return 'يوجد بعض النتائج التي تحتاج إلى متابعة طبية عاجلة. يرجى مراجعة طبيبك الخاص.';
+        }
+        
+        return 'يوجد بعض النتائج التي تحتاج إلى متابعة. ننصح بمراجعة طبيبك للمناقشة والتوجيه.';
+    }
+
+    downloadResults(bookingId) {
+        this.showNotification('جاري تحميل النتائج...', 'info');
+        
+        // محاكاة عملية التحميل
+        setTimeout(() => {
+            this.showNotification('تم تحميل النتائج بنجاح', 'success');
+        }, 2000);
+    }
+
+    cancelBooking(bookingId) {
+        const booking = this.userBookings.find(b => b.id === bookingId);
+        if (!booking) {
+            this.showNotification('الحجز غير موجود', 'error');
+            return;
+        }
+
+        if (booking.status !== 'pending') {
+            this.showNotification('لا يمكن إلغاء هذا الحجز', 'error');
+            return;
+        }
+
+        if (confirm('هل أنت متأكد من إلغاء هذا الحجز؟')) {
+            booking.status = 'cancelled';
+            localStorage.setItem('labBookings', JSON.stringify(this.userBookings));
+            
+            // استعادة الرصيد
+            if (this.userAccount) {
+                this.userAccount.balance += booking.totalPrice;
+                localStorage.setItem('financialAccount', JSON.stringify(this.userAccount));
+            }
+            
+            this.showNotification('تم إلغاء الحجز بنجاح', 'success');
+            this.renderBookings();
+        }
+    }
+
+    getStatusColor(status) {
+        const colors = {
+            'pending': '#f59e0b',
+            'confirmed': '#059669',
+            'completed': '#0ea5e9',
+            'cancelled': '#dc2626'
+        };
+        return colors[status] || '#64748b';
+    }
+
+    openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i>
+            ${message}
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 4000);
+    }
+
+    updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString('ar-EG', { 
+            hour: '2-digit', 
+            minute: '2-digit',
+            hour12: true 
+        });
+        
+        const timeElement = document.getElementById('currentTime');
+        if (timeElement) {
+            timeElement.textContent = timeString;
+        }
+    }
+}
+
+// تهيئة النظام عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+    window.labSystem = new AdvancedLabSystem();
+    
+    // تحميل الحجوزات بعد التهيئة
+    setTimeout(() => {
+        window.labSystem.renderBookings();
+    }, 1000);
+});
+
+// جعل النظام متاحاً globally
+window.AdvancedLabSystem = AdvancedLabSystem;
+</script>
+</body>
+</html>
